@@ -1,0 +1,319 @@
+/* ==========================================================
+   stoic_style.css — 全站樣式
+   風格：極簡古希臘風（石雕與羊皮紙的現代轉化）
+   依據：CLAUDE.md 第 2 節「設計規範」
+   ========================================================== */
+
+/* ---------- 設計變數 ---------- */
+:root {
+  --color-parchment: #F6F1E7;   /* 頁面背景：羊皮紙 */
+  --color-marble:    #EFEBE3;   /* 區塊背景：大理石白 */
+  --color-ink:       #2B2926;   /* 主要文字：墨色 */
+  --color-stone:     #6B675F;   /* 次要文字：石灰灰 */
+  --color-line:      #D9D3C7;   /* 分隔線／邊框：淡石色 */
+  --color-accent:    #8A6F4D;   /* 強調色：暗青銅 */
+
+  --font-serif: "Noto Serif TC", "Songti TC", "Source Han Serif TC",
+                "PMingLiU", "Times New Roman", serif;
+  --font-sans:  "Noto Sans TC", "PingFang TC", "Microsoft JhengHei",
+                "Helvetica Neue", Arial, sans-serif;
+  --font-latin: "Cormorant Garamond", "Cinzel", "Palatino Linotype",
+                Palatino, Georgia, serif;
+
+  --content-width: 45rem;       /* 約 720px */
+  --gutter: 1.5rem;
+  --transition: 180ms ease;
+}
+
+/* ---------- 基礎重設 ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-parchment);
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;         /* 17px */
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+}
+
+p {
+  margin: 0 0 1.5rem;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+a:hover {
+  color: var(--color-ink);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+/* ---------- 版面容器 ---------- */
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- 導覽列 ---------- */
+.site-nav {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.site-nav .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  padding-block: 1.5rem;
+}
+
+.site-nav__brand {
+  font-family: var(--font-latin);
+  font-size: 1.125rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  letter-spacing: 0.1em;
+}
+
+.site-nav__list a {
+  color: var(--color-stone);
+  padding-block: 0.25rem;
+  border-bottom: 1px solid transparent;
+}
+
+.site-nav__list a:hover,
+.site-nav__list a[aria-current="page"] {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-accent);
+}
+
+/* ---------- 頁首 ---------- */
+.page-header {
+  padding-block: 6rem 4rem;
+  text-align: center;
+}
+
+.page-header__eyebrow {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-latin);
+  font-size: 0.9375rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+}
+
+.page-header h1 {
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  letter-spacing: 0.18em;
+}
+
+.page-header__subtitle {
+  margin: 1.5rem 0 0;
+  font-size: 1.0625rem;
+  letter-spacing: 0.15em;
+  color: var(--color-stone);
+}
+
+/* ---------- 分隔線 ---------- */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 auto;
+  max-width: 12rem;
+  border: 0;
+  height: 1rem;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-line);
+}
+
+.divider > span {
+  width: 0.4rem;
+  height: 0.4rem;
+  border: 1px solid var(--color-accent);
+  transform: rotate(45deg);
+}
+
+/* ---------- 主內容 ---------- */
+main section {
+  padding-block: 4rem;
+}
+
+main h2 {
+  margin-bottom: 2rem;
+  font-size: 1.375rem;
+  letter-spacing: 0.15em;
+}
+
+.lead {
+  font-size: 1.125rem;
+  text-align: justify;
+}
+
+/* ---------- 內容分區（首頁三大主題） ---------- */
+.topic-list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.topic-list__item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  padding-block: 2rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.topic-list__index {
+  font-family: var(--font-latin);
+  font-size: 0.875rem;
+  letter-spacing: 0.3em;
+  color: var(--color-accent);
+}
+
+.topic-list__item h3 {
+  font-size: 1.1875rem;
+  letter-spacing: 0.12em;
+}
+
+.topic-list__item h3 a {
+  color: var(--color-ink);
+}
+
+.topic-list__item h3 a:hover {
+  color: var(--color-accent);
+}
+
+.topic-list__item p {
+  margin: 0;
+  color: var(--color-stone);
+  font-size: 1rem;
+}
+
+/* ---------- 原則區塊 ---------- */
+.principles {
+  background-color: var(--color-marble);
+  border-block: 1px solid var(--color-line);
+}
+
+.principles__list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.principles__list li {
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--color-accent);
+}
+
+.principles__list strong {
+  display: block;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.principles__list span {
+  display: block;
+  color: var(--color-stone);
+  font-size: 1rem;
+}
+
+/* ---------- 頁尾 ---------- */
+.site-footer {
+  padding-block: 3rem 4rem;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  color: var(--color-stone);
+}
+
+.site-footer p {
+  margin: 0 0 0.5rem;
+}
+
+/* ---------- 響應式 ---------- */
+@media (min-width: 40rem) {
+  .topic-list__item {
+    grid-template-columns: 4rem 1fr;
+    column-gap: 1rem;
+    align-items: baseline;
+  }
+
+  .topic-list__index {
+    grid-row: span 2;
+  }
+}
+
+@media (max-width: 30rem) {
+  .page-header {
+    padding-block: 4rem 3rem;
+  }
+
+  main section {
+    padding-block: 3rem;
+  }
+
+  .lead {
+    text-align: left;
+  }
+}
+
+/* ---------- 減少動態偏好 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
